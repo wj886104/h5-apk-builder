@@ -1,0 +1,1 @@
+var e=`/assets/treasure_box_close-CFFFlnHY.png`,t=`/assets/treasure_box_open-BYgWOqs0.png`;export{e as n,t};

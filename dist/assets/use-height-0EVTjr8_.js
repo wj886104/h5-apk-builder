@@ -1,0 +1,1 @@
+import{Ht as e,ct as t,tt as n,vn as r}from"./runtime-core.esm-bundler-p7UQb9Ig.js";import{A as i,G as a,j as o}from"./badge-mMsv8Jfi.js";import{i as s}from"./use-touch-_KTcNWlh.js";var c=(c,l)=>{let u=r(),d=()=>{u.value=a(c).height};return t(()=>{if(n(d),l)for(let e=1;e<=3;e++)setTimeout(d,100*e)}),s(()=>n(d)),e([o,i],d),u};export{c as t};

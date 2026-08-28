@@ -1,0 +1,1 @@
+import{vn as e}from"./runtime-core.esm-bundler-p7UQb9Ig.js";import{s as t}from"./src-CE05FAOY.js";var n=e(null),r=null;function i(){async function e(){return r||(r=t.getActivityItems().then(e=>(n.value=e,e)).finally(()=>{r=null}),r)}return{data:n,fetch:e}}export{i as t};

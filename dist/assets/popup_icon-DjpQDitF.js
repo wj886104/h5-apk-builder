@@ -1,0 +1,1 @@
+var e=`/assets/popup_icon-CxbCyR6F.png`;export{e as t};

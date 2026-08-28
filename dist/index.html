@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="renderer" content="webkit" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover" />
+  <meta name="google" content="notranslate" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta content="email=no" name="format-detection" />
+  <title></title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&family=Saira:wght@500&family=Share+Tech&family=Smooch+Sans:wght@100..900&family=Prompt:wght@400;500;600;700&display=swap">
+  <!-- Meta Pixel Code: pixel id from URL ?fbPixelId= or env fallback -->
+  <script>
+    (function () {
+      var pixelId = new URLSearchParams(location.search).get('fbPixelId');
+
+      if (!pixelId) return;
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', pixelId);
+      fbq('track', 'PageView');
+    })();
+  </script>
+  <script>
+    function isSamsungBrowser() {
+      // 获取用户代理字符串
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // 将用户代理字符串转换为小写，方便检查
+      const uaLowerCase = userAgent.toLowerCase();
+
+      // 检查是否包含 "SamsungBrowser" 字符串
+      if (uaLowerCase.includes('samsungbrowser')) {
+        return true;
+      }
+
+      // 备用检测: 检查特定的三星设备型号 + "Version" 字符串 (一些旧版三星浏览器)
+      const samsungDeviceRegex = /(samsung|sm-|gt-|sch-)/;
+      if (samsungDeviceRegex.test(uaLowerCase) && uaLowerCase.includes('version')) {
+        return true;
+      }
+
+      // 如果没有匹配到上述条件，则不是三星浏览器
+      return false;
+    }
+    //添加全局变量
+    window.isSamsungBrowser = isSamsungBrowser
+    try {
+      sessionStorage.setItem('href', location.href.replace(/([^:])\/\//g, '$1/'));
+    } catch (error) {
+      console.error('can not set sessionStorage:', error);
+    }
+    if (isSamsungBrowser() && "serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.produce.min.2.1.7.js")
+        .then((registration) => {
+          window.registration = registration;
+        })
+        .catch(function (error) {
+          if (window.jsSentryError) {
+            window.jsSentryError(error);
+          }
+        });
+    }
+  </script>
+  <style>
+    .app-web-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease
+    }
+
+    .app-web-loading div {
+      width: 2rem;
+      height: 2rem;
+      border: .25rem solid hsla(0, 0%, 100%, .3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: sdspin-data 1s linear infinite
+    }
+
+    @keyframes sdspin-data {
+      0% {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(1turn)
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-DsQh3wzG.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/runtime-core.esm-bundler-p7UQb9Ig.js">
+  <link rel="modulepreload" crossorigin href="/assets/runtime-dom.esm-bundler-D0egefzY.js">
+  <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-hePW80VL.js">
+  <link rel="modulepreload" crossorigin href="/assets/vue-i18n-DyWpKtc1.js">
+  <link rel="modulepreload" crossorigin href="/assets/src-CE05FAOY.js">
+  <link rel="modulepreload" crossorigin href="/assets/dist-CD5Q11Pt.js">
+  <link rel="modulepreload" crossorigin href="/assets/preload-helper-Czpn1I53.js">
+  <link rel="modulepreload" crossorigin href="/assets/user-CkWEq-kp.js">
+  <link rel="modulepreload" crossorigin href="/assets/badge-mMsv8Jfi.js">
+  <link rel="modulepreload" crossorigin href="/assets/use-id-CY0W4ur3.js">
+  <link rel="modulepreload" crossorigin href="/assets/icon-LmzXUdJf.js">
+  <link rel="modulepreload" crossorigin href="/assets/loading-DNQikbot.js">
+  <link rel="modulepreload" crossorigin href="/assets/button-DZmFI49n.js">
+  <link rel="modulepreload" crossorigin href="/assets/use-touch-_KTcNWlh.js">
+  <link rel="modulepreload" crossorigin href="/assets/popup-ByRSAm1p.js">
+  <link rel="modulepreload" crossorigin href="/assets/cell-BIzeA8hE.js">
+  <link rel="modulepreload" crossorigin href="/assets/style-CW5Pl-MD.js">
+  <link rel="modulepreload" crossorigin href="/assets/function-call-BOQfcoba.js">
+  <link rel="modulepreload" crossorigin href="/assets/useApi-CROJJdhE-DOlpajyR.js">
+  <link rel="modulepreload" crossorigin href="/assets/src-lwZWhN8L.js">
+  <link rel="modulepreload" crossorigin href="/assets/src-BQ1OXamh.js">
+  <link rel="modulepreload" crossorigin href="/assets/style-DuV2bbar.js">
+  <link rel="modulepreload" crossorigin href="/assets/style-Cmj9GFHd.js">
+  <link rel="modulepreload" crossorigin href="/assets/style-Cm673cwE.js">
+  <link rel="modulepreload" crossorigin href="/assets/brazil-oFjmTu0G.js">
+  <link rel="modulepreload" crossorigin href="/assets/checked-uzI0aTp2.js">
+  <link rel="modulepreload" crossorigin href="/assets/popup_icon003-DjpQDitF.js">
+  <link rel="modulepreload" crossorigin href="/assets/_plugin-vue_export-helper-BDNMzG2s.js">
+  <link rel="modulepreload" crossorigin href="/assets/usePWAInstall-CsoT3ejV.js">
+  <link rel="modulepreload" crossorigin href="/assets/popup_icon001-BPItjzxg.js">
+  <link rel="modulepreload" crossorigin href="/assets/SvgIcon-CGItsc-w.js">
+  <link rel="modulepreload" crossorigin href="/assets/useJPush-kIl9xbdw.js">
+  <link rel="stylesheet" crossorigin href="/assets/button-CQYrTlDs.css">
+  <link rel="stylesheet" crossorigin href="/assets/cell-Clsg_zf0.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-efS8A1hW.css">
+  <link rel="stylesheet" crossorigin href="/assets/base-ChaxizDN.css">
+  <link rel="stylesheet" crossorigin href="/assets/icon-DLDTcDYi.css">
+  <link rel="stylesheet" crossorigin href="/assets/popup-B1jUkIkM.css">
+  <link rel="stylesheet" crossorigin href="/assets/loading-CYKtIo3R.css">
+  <link rel="stylesheet" crossorigin href="/assets/usePWAInstall-DnZ0XgJz.css">
+  <link rel="stylesheet" crossorigin href="/assets/SvgIcon-CyQ8KSvG.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-OiWKweqQ.css">
+</head>
+
+<body>
+  <div id="app-web-loading">
+    <div class="app-web-loading">
+      <div></div>
+    </div>
+  </div>
+  <div id="app"></div>
+</body>
+
+</html>

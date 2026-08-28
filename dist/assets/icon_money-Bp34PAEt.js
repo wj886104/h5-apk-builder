@@ -1,0 +1,1 @@
+var e=`/assets/icon_money-CNFYNyZc.png`;export{e as t};
