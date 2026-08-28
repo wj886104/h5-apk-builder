@@ -2,72 +2,60 @@ name: Build APK
 
 on:
   workflow_dispatch:
-    inputs:
-      app_name:
-        description: "App名称"
-        required: true
-        default: "My App"
-
-      app_url:
-        description: "H5地址"
-        required: true
-        default: "https://example.com"
-
-      package_name:
-        description: "Android包名"
-        required: true
-        default: "com.example.app"
-
-      version_name:
-        description: "版本号"
-        required: true
-        default: "1.0.0"
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
+
     steps:
-      - name: Checkout
+
+      # 拉取 h5-apk-builder（你的 Vue3 dist）
+      - name: Checkout builder
         uses: actions/checkout@v4
 
+
+      # 拉取 Android 壳模板
+      - name: Checkout android template
+        uses: actions/checkout@v4
+        with:
+          repository: wj886104/h5-apk-template
+          path: android
+
+
+      # 替换 dist
+      - name: Copy Vue dist
+        run: |
+          rm -rf android/app/src/main/assets/dist
+          mkdir -p android/app/src/main/assets/dist
+          cp -r dist/* android/app/src/main/assets/dist/
+
+
+      # Java环境
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
 
+
+      # Android环境
       - name: Setup Android
         uses: android-actions/setup-android@v3
 
-      - name: Install Android SDK
-        run: |
-          sdkmanager "platform-tools"
-          sdkmanager "platforms;android-35"
-          sdkmanager "build-tools;35.0.0"
 
-      - name: Configure APK
-        run: |
-          sed -i "s|__APP_NAME__|${{ inputs.app_name }}|g" \
-            android/app/src/main/res/values/strings.xml
-
-          sed -i "s|__APP_URL__|${{ inputs.app_url }}|g" \
-            android/app/src/main/java/com/example/app/MainActivity.java
-
-          sed -i "s|__PACKAGE_NAME__|${{ inputs.package_name }}|g" \
-            android/app/build.gradle
-
-          sed -i "s|__VERSION_NAME__|${{ inputs.version_name }}|g" \
-            android/app/build.gradle
-
+      # 编译APK
       - name: Build APK
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease
 
+
+      # 保存APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.app_name }}-apk
+          name: apk-release
           path: android/app/build/outputs/apk/release/*.apk
