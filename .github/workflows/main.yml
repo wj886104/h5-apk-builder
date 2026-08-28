@@ -1,0 +1,73 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: "App名称"
+        required: true
+        default: "My App"
+
+      app_url:
+        description: "H5地址"
+        required: true
+        default: "https://example.com"
+
+      package_name:
+        description: "Android包名"
+        required: true
+        default: "com.example.app"
+
+      version_name:
+        description: "版本号"
+        required: true
+        default: "1.0.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
+        run: |
+          sdkmanager "platform-tools"
+          sdkmanager "platforms;android-35"
+          sdkmanager "build-tools;35.0.0"
+
+      - name: Configure APK
+        run: |
+          sed -i "s|__APP_NAME__|${{ inputs.app_name }}|g" \
+            android/app/src/main/res/values/strings.xml
+
+          sed -i "s|__APP_URL__|${{ inputs.app_url }}|g" \
+            android/app/src/main/java/com/example/app/MainActivity.java
+
+          sed -i "s|__PACKAGE_NAME__|${{ inputs.package_name }}|g" \
+            android/app/build.gradle
+
+          sed -i "s|__VERSION_NAME__|${{ inputs.version_name }}|g" \
+            android/app/build.gradle
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.app_name }}-apk
+          path: android/app/build/outputs/apk/release/*.apk
